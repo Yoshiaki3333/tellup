@@ -1,14 +1,16 @@
-<h4><%= @company.name %></h2>
+<p></p>
+<h4>会社名: <%= @company.name %></h2>
 　　住所: <%= @company.adress %>
 　　<p></p>
 　　電話番号:<%= @company.tell %>
+　　<p></p>
+　　<%= link_to '編集', edit_list_company_path, method: :get %>
+　　<%= link_to '削除',  "/lists/#{@list.id}/companies/#{@company.id}", method: :delete %>
 <p></p>
 <h2>履歴登録</h2>
 <div class="form-group">
 <%= form_for ([@list, @company, @contact]) do |f| %>
-<div class="form-control">
-    <%= f.select :person, [ ["加古","加古"], ["森田", "森田"], ["宮田", "宮田" ] ], prompt: "担当者名" %>
-</div>
+
     <%= f.date_field :created_at %>
     <div></div>
     <%= f.select :result, [ ["提案合意","提案合意"], ["資料送付", "資料送付"], ["再TEL", "再TEL" ], ["お断り","お断り"], ["Gブロック","Gブロック"], ["かけない", "かけない" ]], prompt: "結果を選択してください" %>
@@ -19,7 +21,7 @@
     <%= f.submit "登録" %>
 
 <%= link_to '戻る', list_companies_path(anchor: "#{@company.id}"), class: 'hogehoge' %>
-<%= link_to 'リスト一覧へ', root_path %>
+
 <% end %>
 
 </div>
@@ -31,7 +33,7 @@
  <tbody>
    <tr>
       <th>担当者:　</th>
-      <td><%= contact.person %></td>
+      <td><%= contact.user.name %></td>
    </tr>
    <tr>
         <th>結果:　</th> 
@@ -45,9 +47,15 @@
     <th>日程:　</th> 
     <td><%= contact.created_at.strftime('%Y/%m/%d %H:%M') %></td>
    </tr>
-   <p>----------------------------------------------------------------</p>
-    
-
+   <tr>
+     <td><%= link_to '編集', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}/edit", method: :get %></td>
+     <td><%= link_to '削除', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}", method: :delete %></td>
+   </tr>
+   <tr>
+    <th></th>
+    <td>----------------------------------------------------------------</td>
+   </tr>
+   
 
 </tbody>
 </table>

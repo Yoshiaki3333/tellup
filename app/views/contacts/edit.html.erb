@@ -1,0 +1,14 @@
+<h2>履歴編集</h2>
+<div class="form-group">
+<%= form_for ([@list, @company, @contact]) do |f| %>
+
+    <%= f.date_field :created_at %>
+    <div></div>
+    <%= f.select :result, [ ["提案合意","提案合意"], ["資料送付", "資料送付"], ["再TEL", "再TEL" ], ["お断り","お断り"], ["Gブロック","Gブロック"], ["かけない", "かけない" ]], 
+    prompt: "#{@contact.result}" %>
+    <div></div>
+    <div class="form-control">
+        <%= f.text_field :detail, placeholder: "#{@contact.detail}" %>
+    </div>
+    <%= f.submit "更新" %>
+<% end %>

@@ -1,7 +1,9 @@
-<%= form_with url: search_companies_path, method: :get, local: true do |f| %>
-    <%= f.select "area", options_for_select([["関東", "関東"],["関西","関西"],["九州", "九州"],["東海","東海"]]) %>
-  <%= f.submit :search %>
+<p></p>
+<%= form_with url: search_list_companies_path, method: :get, local: true do |f| %>
+    <%= f.text_field "name" %>
+  <%= f.submit :検索 %>
 <% end %>
+<p></p>
 <div class="container">
   <table class="table table-bordered">
   <thead>
@@ -16,7 +18,7 @@
     </thead>
 <% @companies.each do |company| %>
     <tr>
-      <td id="<%= company.id %>"><%= link_to "#{company.name}", "/companies/#{company.id}" %></td>
+      <td id="<%= company.id %>"><%= link_to "#{company.name}", "/lists/#{company.list.id}/companies/#{company.id}", method: :get %></td>
       <% if company.contacts.present? %>
           <% company.contacts.last(1).each do |contact| %>
               <td><%= contact.person %></td>

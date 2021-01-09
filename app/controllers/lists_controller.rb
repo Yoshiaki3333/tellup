@@ -9,5 +9,18 @@ class ListsController < ApplicationController
         @companies = @list.companies.all
     end
     
+    def new
+        @list = List.new
+    end
+    
+    def create
+        List.create(list_params)
+        redirect_to root_path
+    end
+    
+    private
+    def list_params
+        params.require(:list).permit(:project_name, :name)
+    end
     
 end

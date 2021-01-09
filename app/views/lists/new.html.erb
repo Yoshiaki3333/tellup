@@ -1,0 +1,9 @@
+<p></p>
+<%= form_for(@list) do |f| %>
+    <p></p>
+　　<%= f.text_field :project_name, placeholder: "プロジェクト名" %>
+　　<%= f.text_field :name, placeholder: "リスト名" %>
+    <div class="form-control">
+        <%= f.submit "作成" %>
+    </div>
+<% end %>

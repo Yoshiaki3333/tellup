@@ -1,11 +1,19 @@
 <p></p>
 <h3><%= @list.id %>.<%= @list.name %> リスト</h3>
-
-<p><%= link_to 'リスト一覧へ', root_path %></p>
-<%= form_tag import_list_companies_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "インポート" %>
+<%= form_with url: search_list_companies_path, method: :get, local: true do |f| %>
+    <%= f.text_field "name" %>
+  <%= f.submit :検索 %>
 <% end %>
+<p></p>
+<%= form_tag import_list_companies_path, multipart: true do %>
+  <p>
+    <%= file_field_tag :file %>
+  </p>
+  <p>
+    <%= submit_tag "インポート" %>
+  </p>
+<% end %>
+<%= link_to '会社を登録する', new_list_company_path, method: :get %>
 <div class="container">
   <table class="table table-bordered">
   <thead>
