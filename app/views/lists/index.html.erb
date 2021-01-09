@@ -1,0 +1,6 @@
+<h2>リスト一覧</h2>
+<% @lists.each do |list| %>
+ <p></p>
+ <td id="<%= list.id %>"><%= link_to "#{list.name}", "/lists/#{list.id}" %></td>
+ <p></p>
+<% end %>

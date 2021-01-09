@@ -1,0 +1,55 @@
+<h4><%= @company.name %></h2>
+　　住所: <%= @company.adress %>
+　　<p></p>
+　　電話番号:<%= @company.tell %>
+<p></p>
+<h2>履歴登録</h2>
+<div class="form-group">
+<%= form_for ([@list, @company, @contact]) do |f| %>
+<div class="form-control">
+    <%= f.select :person, [ ["加古","加古"], ["森田", "森田"], ["宮田", "宮田" ] ], prompt: "担当者名" %>
+</div>
+    <%= f.date_field :created_at %>
+    <div></div>
+    <%= f.select :result, [ ["提案合意","提案合意"], ["資料送付", "資料送付"], ["再TEL", "再TEL" ], ["お断り","お断り"], ["Gブロック","Gブロック"], ["かけない", "かけない" ]], prompt: "結果を選択してください" %>
+    <div></div>
+    <div class="form-control">
+        <%= f.text_field :detail, placeholder: "履歴を入力してください" %>
+    </div>
+    <%= f.submit "登録" %>
+
+
+<% end %>
+<%= link_to '戻る', list_path, class: 'hogehoge' %>
+<%= link_to 'リスト一覧へ', lists_path, method: :get %>
+</div>
+<p></p>
+<h1>履歴一覧</h1>
+<% @contacts.each do |contact| %>
+<div class="container">
+<table class="table.table-hover">
+ <tbody>
+   <tr>
+      <th>担当者:　</th>
+      <td><%= contact.person %></td>
+   </tr>
+   <tr>
+        <th>結果:　</th> 
+        <td><%= contact.result %></td>
+   </tr>
+   <tr>
+    <th>詳細:　</th> 
+    <td><%= contact.detail %></td>
+   </tr>
+   <tr>
+    <th>日程:　</th> 
+    <td><%= contact.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+   </tr>
+   <p>----------------------------------------------------------------</p>
+    
+
+
+</tbody>
+</table>
+</div>
+<% end %>

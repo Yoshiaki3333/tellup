@@ -1,0 +1,41 @@
+<%= form_with url: search_companies_path, method: :get, local: true do |f| %>
+    <%= f.select "area", options_for_select([["関東", "関東"],["関西","関西"],["九州", "九州"],["東海","東海"]]) %>
+  <%= f.submit :search %>
+<% end %>
+<div class="container">
+  <table class="table table-bordered">
+  <thead>
+     <th>会社名</th>
+     <th>担当者</th>
+     <th>TEL日</th>
+     <th>電話番号</th>
+     <th>結果</th>
+     <th>履歴</th>
+     <th>地域</th>
+     <th>SFA</th>
+    </thead>
+<% @companies.each do |company| %>
+    <tr>
+      <td id="<%= company.id %>"><%= link_to "#{company.name}", "/companies/#{company.id}" %></td>
+      <% if company.contacts.present? %>
+          <% company.contacts.last(1).each do |contact| %>
+              <td><%= contact.person %></td>
+              <td><%= contact.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= company.tell %></td>
+              <td><%= contact.result %></td>
+              <td><%= contact.detail %></td>
+              <td><%= company.area %></td>
+              <td></td>
+          <% end %>
+      <% else %>
+      <td></td>
+      <td></td>
+      <td><%= company.tell %></td>
+      <td></td>
+      <td></td>
+      <td><%= company.area %></td>
+      <td></td>
+      <% end %>
+    </tr>
+  
+<% end %>
