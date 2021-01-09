@@ -1,3 +1,11 @@
+<p></p>
+<h3><%= @list.id %>.<%= @list.name %> リスト</h3>
+
+<p><%= link_to 'リスト一覧へ', root_path %></p>
+<%= form_tag import_list_companies_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
 <div class="container">
   <table class="table table-bordered">
   <thead>
@@ -7,12 +15,11 @@
      <th>電話番号</th>
      <th>結果</th>
      <th>履歴</th>
-     <th>地域</th>
      <th>SFA</th>
     </thead>
 <% @companies.each do |company| %>
     <tr>
-      <td id="<%= company.id %>"><%= link_to "#{company.name}", "/companies/#{company.id}" %></td>
+      <td id="<%= company.id %>"><%= link_to "#{company.name}", "/lists/#{company.list.id}/companies/#{company.id}" %></td>
       <% if company.contacts.present? %>
           <% company.contacts.last(1).each do |contact| %>
               <td><%= contact.person %></td>
@@ -20,7 +27,6 @@
               <td><%= company.tell %></td>
               <td><%= contact.result %></td>
               <td><%= contact.detail %></td>
-              <td><%= company.area %></td>
               <td><%= company.top_result %></td>
           <% end %>
       <% else %>
@@ -29,7 +35,6 @@
       <td><%= company.tell %></td>
       <td></td>
       <td></td>
-      <td><%= company.area %></td>
       <td></td>
       <% end %>
     </tr>

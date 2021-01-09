@@ -1,10 +1,10 @@
 class CompaniesController < ApplicationController
     
     def index
+        @list = List.find(params[:list_id])
         @company = Company.new
-        @companies = Company.all
+        @companies = @list.companies.all
         @company = @company.contacts.last
-    
     end
     
     def show
@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
     
     def import
         @list = List.find(params[:list_id])
-        @list.company.import(params[:file])
-        redirect_to root_path
+        @list.companies.import(params[:file])
+        redirect_back(fallback_location: root_path)
     end
 end

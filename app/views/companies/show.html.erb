@@ -18,10 +18,10 @@
     </div>
     <%= f.submit "登録" %>
 
-
+<%= link_to '戻る', list_companies_path(anchor: "#{@company.id}"), class: 'hogehoge' %>
+<%= link_to 'リスト一覧へ', root_path %>
 <% end %>
-<%= link_to '戻る', list_path, class: 'hogehoge' %>
-<%= link_to 'リスト一覧へ', lists_path, method: :get %>
+
 </div>
 <p></p>
 <h1>履歴一覧</h1>
