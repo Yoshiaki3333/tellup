@@ -4,9 +4,17 @@ class ContactsController < ApplicationController
         
     end
     
+    def new
+        @contact = Contact.new
+        @company = Company.find(params[:company_id])
+        @list = @company.list        
+    end
+    
     def create
-        Contact.create!(contact_params)
-        redirect_back(fallback_location: root_path)
+        contact = Contact.create!(contact_params)
+        @company = contact.company
+        @list = @company.list
+        redirect_to "/lists/#{@list.id}/companies/#{@company.id}"
     end
     
     def destroy

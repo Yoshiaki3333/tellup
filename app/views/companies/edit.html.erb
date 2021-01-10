@@ -1,15 +1,15 @@
 <p></p>
-<h2会社を編集する</h2>
+<h2>会社を編集する</h2>
 <%= form_for ([@list, @company]) do |f| %>
     <div></div>
-    <div class="form-control">
-        <%= f.text_field :name, placeholder: "#{@company.name}" %>
+    <div class="form-group">
+        <%= f.text_field :name, placeholder: "#{@company.name}",  :class => 'form-control'%>
     </div>
-    <div class="form-control">
-        <%= f.text_field :adress, placeholder: "#{@company.adress}" %>
+    <div class="form-group">
+        <%= f.text_field :adress, placeholder: "#{@company.adress}", :class => 'form-control'%>
     </div>
-    <div class="form-control">
-        <%= f.text_field :tell, placeholder: "#{@company.tell}" %>
+    <div class="form-group">
+        <%= f.text_field :tell, placeholder: "#{@company.tell}", :class => 'form-control' %>
     </div>
-    <%= f.submit "更新" %>
+    <%= f.submit "更新", :class => 'btn btn-primary btn-sm' %>
 <% end %>

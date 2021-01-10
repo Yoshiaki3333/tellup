@@ -1,32 +1,18 @@
 <p></p>
-<h4>会社名: <%= @company.name %></h2>
-　　住所: <%= @company.adress %>
+<h4>会社名： <%= @company.name %></h2>
+　　住所： <%= @company.adress %>
 　　<p></p>
-　　電話番号:<%= @company.tell %>
+　　電話番号：<%= @company.tell %>
 　　<p></p>
-　　<%= link_to '編集', edit_list_company_path, method: :get %>
-　　<%= link_to '削除',  "/lists/#{@list.id}/companies/#{@company.id}", method: :delete %>
+　　<%= link_to '編集', edit_list_company_path, method: :get, class: "btn btn-outline-primary btn-sm" %>
+　　<%= link_to '削除',  "/lists/#{@list.id}/companies/#{@company.id}", method: :delete, class: "btn btn-outline-primary btn-sm"%>
 <p></p>
-<h2>履歴登録</h2>
-<div class="form-group">
-<%= form_for ([@list, @company, @contact]) do |f| %>
 
-    <%= f.date_field :created_at %>
-    <div></div>
-    <%= f.select :result, [ ["提案合意","提案合意"], ["資料送付", "資料送付"], ["再TEL", "再TEL" ], ["お断り","お断り"], ["Gブロック","Gブロック"], ["かけない", "かけない" ]], prompt: "結果を選択してください" %>
-    <div></div>
-    <div class="form-control">
-        <%= f.text_field :detail, placeholder: "履歴を入力してください" %>
-    </div>
-    <%= f.submit "登録" %>
+ <%= link_to '履歴登録', "/lists/#{@list.id}/companies/#{@company.id}/contacts/new", method: :get, class: "btn btn-primary active" %>
 
-<%= link_to '戻る', list_companies_path(anchor: "#{@company.id}") %>
-
-<% end %>
-
-</div>
+<%= link_to '戻る', list_companies_path(anchor: "#{@company.id}"), class: "btn btn-primary active" %>
 <p></p>
-<h1>履歴一覧</h1>
+<h3>履歴一覧</h1>
 <% @contacts.each do |contact| %>
 <div class="container">
 <table class="table.table-hover">
@@ -48,8 +34,8 @@
     <td><%= contact.created_at.strftime('%Y/%m/%d %H:%M') %></td>
    </tr>
    <tr>
-     <td><%= link_to '編集', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}/edit", method: :get %></td>
-     <td><%= link_to '削除', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}", method: :delete %></td>
+     <td><%= link_to '編集', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}/edit", method: :get, class: "btn btn-outline-primary btn-sm" %></td>
+     <td><%= link_to '削除', "/lists/#{@list.id}/companies/#{@company.id}/contacts/#{contact.id}", method: :delete, class: "btn btn-outline-primary btn-sm" %></td>
    </tr>
    <tr>
     <th></th>

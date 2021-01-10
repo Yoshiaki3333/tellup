@@ -21,7 +21,7 @@
       <td id="<%= company.id %>"><%= link_to "#{company.name}", "/lists/#{company.list.id}/companies/#{company.id}", method: :get %></td>
       <% if company.contacts.present? %>
           <% company.contacts.last(1).each do |contact| %>
-              <td><%= contact.person %></td>
+              <td><%= contact.user.name %></td>
               <td><%= contact.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= company.tell %></td>
               <td><%= contact.result %></td>
