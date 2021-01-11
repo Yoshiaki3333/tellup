@@ -1,7 +1,9 @@
 class ListsController < ApplicationController
     
     def index
+        @list = List.new
         @lists = List.all
+        @list = @list.companies.all
     end
     
     def show

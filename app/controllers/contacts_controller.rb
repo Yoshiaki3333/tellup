@@ -40,7 +40,7 @@ class ContactsController < ApplicationController
     
     private
     def contact_params
-        params.require(:contact).permit(:person, :result, :detail,)
+        params.require(:contact).permit(:person, :result, :detail, :updated_at)
         .merge(company_id: params[:company_id], user_id: current_user.id, list_id: params[:list_id])
     end
 end

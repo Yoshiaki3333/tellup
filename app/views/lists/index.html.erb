@@ -7,7 +7,11 @@
   <% @lists.each.with_index(1) do |list, i| %>
   <div class="list-group">
    <button type="button" class="list-group-item list-group-item-action">
-    <%= i %>.<%= link_to "#{list.name}（#{list.project_name}）", "/lists/#{list.id}/companies" %>
+   <% if list.companies.present? %>
+    <%= i %>.<%= link_to "#{list.name}（#{list.project_name}）", "/lists/#{list.id}/companies" %>　　　　　会社数：<%= list.companies.count %>社
+   <% else %>
+    <%= i %>.<%= link_to "#{list.name}（#{list.project_name}）", "/lists/#{list.id}/companies" %>　　　　　※登録がありません。
+   <% end %>
    </button>
   </div>
   <% end %>
